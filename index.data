@@ -1,0 +1,16 @@
+#ifdef GL_ES
+precision mediump float;
+#endif
+
+varying vec2 fragTexCoord;
+varying vec4 fragColor;
+
+uniform sampler2D texture0;
+uniform float time;
+
+void main() {
+    float wave = sin(fragTexCoord.y * 20.0 + time * 5.0) * 0.02;
+    vec2 uv = vec2(fragTexCoord.x + wave, fragTexCoord.y);
+    vec4 tex = texture2D(texture0, uv);
+    gl_FragColor = tex * fragColor;
+}
